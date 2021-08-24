@@ -8,7 +8,6 @@ import {
   Put,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { Task } from './interfaces/Task';
 import { CreateTaskDto } from './dto/create-task.dto';
 
 @Controller('tasks')
@@ -16,8 +15,9 @@ export class TasksController {
   constructor(private readonly taskService: TasksService) {}
 
   @Get()
-  getTasks(): Task[] {
-    return this.taskService.getTasks();
+  async getTasks() {
+    const tasks = await this.taskService.getTasks();
+    return tasks;
   }
 
   @Post()
