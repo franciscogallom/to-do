@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { EditTaskDto } from './dto/edit-task.dto';
 
 @Controller('tasks')
 export class TasksController {
@@ -21,17 +22,20 @@ export class TasksController {
   }
 
   @Post()
-  addTask(@Body() task: CreateTaskDto) {
-    return this.taskService.addTask(task);
+  async addTask(@Body() task: CreateTaskDto) {
+    const newTask = await this.taskService.addTask(task);
+    return newTask;
   }
 
   @Delete(':id')
-  deleteTask(@Param('id') id) {
-    return this.taskService.deleteTask(id);
+  async deleteTask(@Param('id') id) {
+    const { affected } = await this.taskService.deleteTask(id);
+    return affected;
   }
 
   @Put(':id')
-  updateTask(@Param('id') id) {
-    return this.taskService.updateTask(id);
+  async updateTask(@Param('id') id, @Body() task: EditTaskDto) {
+    const updatedTask = await this.taskService.updateTask(id, task);
+    return updatedTask;
   }
 }
