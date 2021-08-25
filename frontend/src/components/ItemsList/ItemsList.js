@@ -2,7 +2,7 @@ import { ListItem } from "../ListItem/ListItem"
 
 import "./itemsList.css"
 
-export function ItemsList({ tasks, setModal, setTaskToEdit, deleteTask }) {
+export function ItemsList({ tasks, setModal, setTaskToEdit, deleteTask, markTask }) {
   return (
     <div className="items-list">
       {tasks.length ? (
@@ -14,6 +14,7 @@ export function ItemsList({ tasks, setModal, setTaskToEdit, deleteTask }) {
               setModal={setModal}
               setTaskToEdit={setTaskToEdit}
               deleteTask={deleteTask}
+              markTask={markTask}
             />
           ))}
         </ul>

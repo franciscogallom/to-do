@@ -19,7 +19,6 @@ function App() {
       .get("http://localhost:8080/tasks")
       .then((res) => {
         setTasks(res.data)
-        console.log(tasks)
       })
       .catch((e) => console.log(e))
   }
@@ -54,10 +53,21 @@ function App() {
     axios
       .put(`http://localhost:8080/tasks/${id}`, {
         description: taskToEdit.description,
-        completed: false,
       })
       .then((res) => {
         setTaskToEdit({})
+        const updatedTasks = tasks.map((item) => (item.id === res.data.id ? res.data : item))
+        setTasks(updatedTasks)
+      })
+      .catch((e) => console.log(e))
+  }
+
+  const markTask = (item) => {
+    axios
+      .put(`http://localhost:8080/tasks/${item.id}`, {
+        completed: !item.completed,
+      })
+      .then((res) => {
         const updatedTasks = tasks.map((item) => (item.id === res.data.id ? res.data : item))
         setTasks(updatedTasks)
       })
@@ -71,7 +81,12 @@ function App() {
       {Object.keys(taskToEdit).length ? (
         <UpdateTask taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} updateTask={updateTask} />
       ) : (
-        <ItemsList tasks={tasks} setTaskToEdit={setTaskToEdit} deleteTask={deleteTask} />
+        <ItemsList
+          tasks={tasks}
+          setTaskToEdit={setTaskToEdit}
+          deleteTask={deleteTask}
+          markTask={markTask}
+        />
       )}
 
       <div className="new-task">

@@ -1,10 +1,10 @@
 import "./listItem.css"
 
-export function ListItem({ item, setTaskToEdit, deleteTask }) {
+export function ListItem({ item, setTaskToEdit, deleteTask, markTask }) {
   return (
     <li className="list-item">
       <div>
-        <input type="checkbox" />
+        <input onClick={() => markTask(item)} type="checkbox" defaultChecked={item.completed} />
         <p>{item.description}</p>
       </div>
       <div>
