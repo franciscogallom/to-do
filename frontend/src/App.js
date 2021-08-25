@@ -36,6 +36,17 @@ function App() {
       })
   }
 
+  const deleteTask = (id) => {
+    axios
+      .delete(`http://localhost:8080/tasks/${id}`)
+      .then((res) => {
+        const updatedTasks = tasks.filter((item) => item.id !== id)
+        setTasks(updatedTasks)
+        console.log(`elimino ${res.data}`)
+      })
+      .catch((e) => console.log(e))
+  }
+
   return (
     <div className="App">
       <h1>To-Do List</h1>
