@@ -68,6 +68,12 @@ function App() {
     <div className="App">
       <h1>To-Do List</h1>
 
+      {Object.keys(taskToEdit).length ? (
+        <UpdateTask taskToEdit={taskToEdit} setTaskToEdit={setTaskToEdit} updateTask={updateTask} />
+      ) : (
+        <ItemsList tasks={tasks} setTaskToEdit={setTaskToEdit} deleteTask={deleteTask} />
+      )}
+
       <div className="new-task">
         <input
           id="addTaskInput"
