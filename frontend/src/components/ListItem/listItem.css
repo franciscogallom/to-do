@@ -13,10 +13,11 @@
   display: flex;
   margin: 0.5em 0;
   align-items: center;
+  font-size: 1.5em;
 }
 
 .list-item input {
-  margin: 0.25em 0.5em 0 0;
+  margin-right: 0.5em;
   cursor: pointer;
 }
 
