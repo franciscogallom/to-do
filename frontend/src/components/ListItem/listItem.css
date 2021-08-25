@@ -1,0 +1,29 @@
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-item span {
+  margin: 0 0.25em;
+  cursor: pointer;
+}
+
+.list-item div {
+  display: flex;
+  margin: 0.5em 0;
+  align-items: center;
+}
+
+.list-item input {
+  margin: 0.25em 0.5em 0 0;
+  cursor: pointer;
+}
+
+.edit-btn {
+  color: #5ea7fc;
+}
+
+.delete-btn {
+  color: #eb346e;
+}
