@@ -1,5 +1,17 @@
-* {
+body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+ul {
+  padding-left: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  padding: 0.25em 0.75em;
 }
