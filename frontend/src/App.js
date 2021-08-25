@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
 import axios from "axios"
 
+import { ItemsList } from "./components/ItemsList/ItemsList"
+import { UpdateTask } from "./components/UpdateTask/UpdateTask"
 import "./App.css"
 
 function App() {
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState()
+  const [taskToEdit, setTaskToEdit] = useState({})
 
   useEffect(() => {
     getTasks()
@@ -43,6 +46,20 @@ function App() {
         const updatedTasks = tasks.filter((item) => item.id !== id)
         setTasks(updatedTasks)
         console.log(`elimino ${res.data}`)
+      })
+      .catch((e) => console.log(e))
+  }
+
+  const updateTask = (id) => {
+    axios
+      .put(`http://localhost:8080/tasks/${id}`, {
+        description: taskToEdit.description,
+        completed: false,
+      })
+      .then((res) => {
+        setTaskToEdit({})
+        const updatedTasks = tasks.map((item) => (item.id === res.data.id ? res.data : item))
+        setTasks(updatedTasks)
       })
       .catch((e) => console.log(e))
   }
