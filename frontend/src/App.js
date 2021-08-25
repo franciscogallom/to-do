@@ -5,6 +5,7 @@ import "./App.css"
 
 function App() {
   const [tasks, setTasks] = useState([])
+  const [newTask, setNewTask] = useState()
 
   useEffect(() => {
     getTasks()
@@ -20,9 +21,34 @@ function App() {
       .catch((e) => console.log(e))
   }
 
+  const addTask = () => {
+    axios
+      .post("http://localhost:8080/tasks", {
+        description: newTask,
+        completed: false,
+      })
+      .then((res) => {
+        setTasks([...tasks, res.data])
+        document.getElementById("addTaskInput").value = ""
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+
   return (
     <div className="App">
       <h1>To-Do List</h1>
+
+      <div className="new-task">
+        <input
+          id="addTaskInput"
+          type="text"
+          placeholder="New Task"
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <button onClick={addTask}>Add</button>
+      </div>
     </div>
   )
 }
