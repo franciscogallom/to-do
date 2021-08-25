@@ -1,0 +1,19 @@
+.update-task {
+  border: 0.1em solid rgb(83, 83, 83);
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.update-task p {
+  font-size: 1.5em;
+}
+
+.update-task input {
+  width: 100%;
+  margin: 1em 0;
+}
+
+.update-task button {
+  margin-top: 0.5em;
+  margin-right: 0.5em;
+}
