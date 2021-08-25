@@ -9,6 +9,7 @@ function App() {
   const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState()
   const [taskToEdit, setTaskToEdit] = useState({})
+  const [error, setError] = useState()
 
   useEffect(() => {
     getTasks()
@@ -20,7 +21,7 @@ function App() {
       .then((res) => {
         setTasks(res.data)
       })
-      .catch((e) => console.log(e))
+      .catch(() => setError("obtener las tareas"))
   }
 
   const addTask = () => {
@@ -33,9 +34,7 @@ function App() {
         setTasks([...tasks, res.data])
         document.getElementById("addTaskInput").value = ""
       })
-      .catch((e) => {
-        console.log(e)
-      })
+      .catch(() => setError("añadir la tarea"))
   }
 
   const deleteTask = (id) => {
@@ -44,9 +43,8 @@ function App() {
       .then((res) => {
         const updatedTasks = tasks.filter((item) => item.id !== id)
         setTasks(updatedTasks)
-        console.log(`elimino ${res.data}`)
       })
-      .catch((e) => console.log(e))
+      .catch(() => setError("borrar la tarea"))
   }
 
   const updateTask = (id) => {
@@ -59,7 +57,7 @@ function App() {
         const updatedTasks = tasks.map((item) => (item.id === res.data.id ? res.data : item))
         setTasks(updatedTasks)
       })
-      .catch((e) => console.log(e))
+      .catch(() => setError("actualizar la tarea"))
   }
 
   const markTask = (item) => {
@@ -71,7 +69,7 @@ function App() {
         const updatedTasks = tasks.map((item) => (item.id === res.data.id ? res.data : item))
         setTasks(updatedTasks)
       })
-      .catch((e) => console.log(e))
+      .catch(() => setError("cambiar el estado de la tarea"))
   }
 
   return (
@@ -87,6 +85,12 @@ function App() {
           deleteTask={deleteTask}
           markTask={markTask}
         />
+      )}
+
+      {error && (
+        <p className="error">
+          Algo salio mal al {error}. Recargue la página y vuelva a intentarlo.
+        </p>
       )}
 
       <div className="new-task">
